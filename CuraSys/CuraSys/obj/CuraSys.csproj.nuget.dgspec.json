@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\krzys\\Documents\\GitHub\\CuraSys\\CuraSys\\CuraSys\\CuraSys.csproj": {}
+    "C:\\Users\\Acer\\OneDrive\\Dokumenty\\GitHub\\CuraSys\\CuraSys\\CuraSys\\CuraSys.csproj": {}
   },
   "projects": {
-    "C:\\Users\\krzys\\Documents\\GitHub\\CuraSys\\CuraSys\\CuraSys\\CuraSys.csproj": {
+    "C:\\Users\\Acer\\OneDrive\\Dokumenty\\GitHub\\CuraSys\\CuraSys\\CuraSys\\CuraSys.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\krzys\\Documents\\GitHub\\CuraSys\\CuraSys\\CuraSys\\CuraSys.csproj",
+        "projectUniqueName": "C:\\Users\\Acer\\OneDrive\\Dokumenty\\GitHub\\CuraSys\\CuraSys\\CuraSys\\CuraSys.csproj",
         "projectName": "CuraSys",
-        "projectPath": "C:\\Users\\krzys\\Documents\\GitHub\\CuraSys\\CuraSys\\CuraSys\\CuraSys.csproj",
-        "packagesPath": "C:\\Users\\krzys\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\krzys\\Documents\\GitHub\\CuraSys\\CuraSys\\CuraSys\\obj\\",
+        "projectPath": "C:\\Users\\Acer\\OneDrive\\Dokumenty\\GitHub\\CuraSys\\CuraSys\\CuraSys\\CuraSys.csproj",
+        "packagesPath": "C:\\Users\\Acer\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Acer\\OneDrive\\Dokumenty\\GitHub\\CuraSys\\CuraSys\\CuraSys\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\krzys\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Acer\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0-windows"

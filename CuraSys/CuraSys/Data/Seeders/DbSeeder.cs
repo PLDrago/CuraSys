@@ -23,6 +23,7 @@ public class DbSeeder
                 new Patient { FirstName = "Krzysztof", LastName = "Szymański", Pesel = "87080856789", Phone = "508890123", Email = "krzysztof.szymanski@example.com", HashPassword = "hashed_pw", BirthDate = new DateTime(1987,8,8), Gender = "male", Address = "ul. Akacjowa 6", City = "Szczecin", PostalCode = "70-008", CreatedAt = DateTime.Now },
                 new Patient { FirstName = "Natalia", LastName = "Dąbrowska", Pesel = "91090967890", Phone = "509901234", Email = "natalia.dabrowska@example.com", HashPassword = "hashed_pw", BirthDate = new DateTime(1991,9,9), Gender = "female", Address = "ul. Topolowa 7", City = "Białystok", PostalCode = "15-009", CreatedAt = DateTime.Now },
                 new Patient { FirstName = "Piotr", LastName = "Pawłowski", Pesel = "94010178901", Phone = "510012345", Email = "piotr.pawlowski@example.com", HashPassword = "hashed_pw", BirthDate = new DateTime(1994,1,1), Gender = "male", Address = "ul. Wierzbowa 11", City = "Katowice", PostalCode = "40-010", CreatedAt = DateTime.Now },
+                new Patient { FirstName = "Krzysztof", LastName = "Majka", Pesel = "11111111111", Phone = "730051758", Email = "krzysztof_majka@poczta.fm", HashPassword = "opiea502", BirthDate = new DateTime(2003, 4, 27), Gender = "male", Address = "ul. Dębicka 252", City = "Rzeszów", PostalCode = "35-213", CreatedAt = DateTime.Now },
             };
 
             context.Patients.AddRange(patients);

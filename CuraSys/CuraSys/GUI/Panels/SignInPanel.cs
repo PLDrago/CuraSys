@@ -1,6 +1,11 @@
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
+using CuraSys.Data;
+using CuraSys.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace CuraSys.GUI.Panels
 {
@@ -10,10 +15,26 @@ namespace CuraSys.GUI.Panels
         private TextBox passwordTextBox = new();
         private Button loginButton = new();
 
-        public event Action? OnPatientLoginSuccess;
+        public event Action<Patient>? OnPatientLoginSuccess;
+
+        private readonly CuraSysContext _context;
 
         public SignInPanel()
         {
+            var config = new ConfigurationBuilder()
+                .SetBasePath(AppContext.BaseDirectory)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .Build();
+
+            var optionsBuilder = new DbContextOptionsBuilder<CuraSysContext>();
+            optionsBuilder.UseMySql(
+                config.GetConnectionString("DefaultConnection"),
+                new MySqlServerVersion(new Version(8, 0, 34))
+            );
+
+            _context = new CuraSysContext(optionsBuilder.Options);
+
+            // UI
             Dock = DockStyle.Fill;
             BackColor = Color.White;
 
@@ -48,10 +69,14 @@ namespace CuraSys.GUI.Panels
         {
             string pesel = peselTextBox.Text;
             string password = passwordTextBox.Text;
-            
-            if (pesel == "12345678901" && password == "test")
+
+            var patient = _context.Patients
+                .AsNoTracking()
+                .FirstOrDefault(p => p.Pesel == pesel && p.HashPassword == password); 
+
+            if (patient != null)
             {
-                OnPatientLoginSuccess?.Invoke();
+                OnPatientLoginSuccess?.Invoke(patient);
             }
             else
             {
