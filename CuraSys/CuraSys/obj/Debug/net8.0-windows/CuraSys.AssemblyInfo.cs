@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CuraSys")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+013b13ac695e02d787ec2e14cef381d3fc9a2acc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4d1830c7f364f32512ed22226d985fd820971c9d")]
 [assembly: System.Reflection.AssemblyProductAttribute("CuraSys")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CuraSys")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
