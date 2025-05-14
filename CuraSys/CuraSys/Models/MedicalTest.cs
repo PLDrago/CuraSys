@@ -9,4 +9,5 @@ public class MedicalTest
     public decimal Price { get; set; }
 
     public List<TestResult> Results { get; set; } = new();
+    public ICollection<ScheduledTest> ScheduledTests { get; set; } = new List<ScheduledTest>();
 }

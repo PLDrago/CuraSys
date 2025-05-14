@@ -16,4 +16,5 @@ public class MedicalStaff
 
     public List<Visit> Visits { get; set; } = new();
     public List<StaffSpeciality> Specialities { get; set; } = new();
+    public ICollection<ScheduledTest> ScheduledTests { get; set; } = new List<ScheduledTest>();
 }

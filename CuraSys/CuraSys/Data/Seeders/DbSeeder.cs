@@ -194,11 +194,11 @@ public class DbSeeder
         {
             var prescriptions = new List<Prescription>
             {
-                new Prescription { VisitId = 1, IssuedAt = DateTime.Now.AddDays(-10), Notes = "Ibuprofen 3x dziennie przez 5 dni." },
-                new Prescription { VisitId = 2, IssuedAt = DateTime.Now.AddDays(-7), Notes = "Apap na gorączkę – do 4 tabletek dziennie." },
-                new Prescription { VisitId = 3, IssuedAt = DateTime.Now.AddDays(-5), Notes = "Amoksiklav przez 7 dni – zakażenie bakteryjne." },
-                new Prescription { VisitId = 4, IssuedAt = DateTime.Now.AddDays(-3), Notes = "Controloc rano, przed posiłkiem, przez 2 tygodnie." },
-                new Prescription { VisitId = 5, IssuedAt = DateTime.Now.AddDays(-1), Notes = "Polopiryna S – doraźnie." },
+                new Prescription { PrescriptionNumber = "1234", VisitId = 1, IssuedAt = DateTime.Now.AddDays(-10), Notes = "Ibuprofen 3x dziennie przez 5 dni." },
+                new Prescription { PrescriptionNumber = "4444", VisitId = 2, IssuedAt = DateTime.Now.AddDays(-7), Notes = "Apap na gorączkę – do 4 tabletek dziennie." },
+                new Prescription { PrescriptionNumber = "1111", VisitId = 3, IssuedAt = DateTime.Now.AddDays(-5), Notes = "Amoksiklav przez 7 dni – zakażenie bakteryjne." },
+                new Prescription { PrescriptionNumber = "4321", VisitId = 4, IssuedAt = DateTime.Now.AddDays(-3), Notes = "Controloc rano, przed posiłkiem, przez 2 tygodnie." },
+                new Prescription { PrescriptionNumber = "1324", VisitId = 5, IssuedAt = DateTime.Now.AddDays(-1), Notes = "Polopiryna S – doraźnie." },
             };
 
             context.Prescriptions.AddRange(prescriptions);
@@ -230,6 +230,23 @@ public class DbSeeder
             };
 
             context.WorkSchedules.AddRange(schedules);
+            context.SaveChanges();
+        }
+        if (!context.ScheduledTests.Any())
+        {
+            context.ScheduledTests.AddRange(new[]
+            {
+                new ScheduledTest { PatientId = 1, TestId = 1, DoctorId = 1, ScheduledDateTime = DateTime.Today.AddDays(1).AddHours(9), Status = "Zaplanowane", Comments = "Na czczo" },
+                new ScheduledTest { PatientId = 2, TestId = 3, DoctorId = 2, ScheduledDateTime = DateTime.Today.AddDays(2).AddHours(10), Status = "Zaplanowane", Comments = null },
+                new ScheduledTest { PatientId = 3, TestId = 2, DoctorId = 1, ScheduledDateTime = DateTime.Today.AddDays(3).AddHours(8), Status = "Zaplanowane", Comments = "Przynieść wyniki morfologii" },
+                new ScheduledTest { PatientId = 4, TestId = 4, DoctorId = 3, ScheduledDateTime = DateTime.Today.AddDays(1).AddHours(11), Status = "Zaplanowane", Comments = null },
+                new ScheduledTest { PatientId = 5, TestId = 5, DoctorId = 2, ScheduledDateTime = DateTime.Today.AddDays(4).AddHours(9), Status = "Zaplanowane", Comments = "Obserwacja ciśnienia" },
+                new ScheduledTest { PatientId = 1, TestId = 5, DoctorId = 3, ScheduledDateTime = DateTime.Today.AddDays(5).AddHours(10), Status = "Zaplanowane", Comments = null },
+                new ScheduledTest { PatientId = 2, TestId = 2, DoctorId = 1, ScheduledDateTime = DateTime.Today.AddDays(2).AddHours(13), Status = "Zaplanowane", Comments = null },
+                new ScheduledTest { PatientId = 3, TestId = 1, DoctorId = 2, ScheduledDateTime = DateTime.Today.AddDays(3).AddHours(15), Status = "Zaplanowane", Comments = "Skontrolować wcześniej wykonane badanie" },
+                new ScheduledTest { PatientId = 4, TestId = 3, DoctorId = 1, ScheduledDateTime = DateTime.Today.AddDays(6).AddHours(10), Status = "Zaplanowane", Comments = null },
+                new ScheduledTest { PatientId = 5, TestId = 4, DoctorId = 2, ScheduledDateTime = DateTime.Today.AddDays(7).AddHours(9), Status = "Zaplanowane", Comments = "Obowiązkowe skierowanie" }
+            });
             context.SaveChanges();
         }
         context.SaveChanges();

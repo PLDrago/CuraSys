@@ -21,6 +21,8 @@ public class CuraSysContext : DbContext
     public DbSet<TestResult> TestResults { get; set; }
     public DbSet<WorkSchedule> WorkSchedules { get; set; }
     public DbSet<StaffSpeciality> StaffSpecialities { get; set; }
+    public DbSet<ScheduledTest> ScheduledTests { get; set; }
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -157,5 +159,24 @@ public class CuraSysContext : DbContext
             .HasOne(i => i.Visit)
             .WithMany(v => v.Invoices)
             .HasForeignKey(i => i.VisitId);
+        modelBuilder.Entity<ScheduledTest>()
+            .ToTable("scheduled_tests")
+            .HasKey(st => st.Id);
+
+        modelBuilder.Entity<ScheduledTest>()
+            .HasOne(st => st.Patient)
+            .WithMany(p => p.ScheduledTests)
+            .HasForeignKey(st => st.PatientId);
+
+        modelBuilder.Entity<ScheduledTest>()
+            .HasOne(st => st.Test)
+            .WithMany(mt => mt.ScheduledTests)
+            .HasForeignKey(st => st.TestId);
+
+        modelBuilder.Entity<ScheduledTest>()
+            .HasOne(st => st.Doctor)
+            .WithMany(d => d.ScheduledTests)
+            .HasForeignKey(st => st.DoctorId);
+
     }
 }

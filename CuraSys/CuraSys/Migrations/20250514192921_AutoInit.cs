@@ -216,6 +216,46 @@ namespace CuraSys.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "scheduled_tests",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    PatientId = table.Column<int>(type: "int", nullable: false),
+                    TestId = table.Column<int>(type: "int", nullable: false),
+                    DoctorId = table.Column<int>(type: "int", nullable: false),
+                    ScheduledDateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Status = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Comments = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_scheduled_tests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_scheduled_tests_medical_staff_DoctorId",
+                        column: x => x.DoctorId,
+                        principalTable: "medical_staff",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_scheduled_tests_medical_tests_TestId",
+                        column: x => x.TestId,
+                        principalTable: "medical_tests",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_scheduled_tests_patients_PatientId",
+                        column: x => x.PatientId,
+                        principalTable: "patients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "visits",
                 columns: table => new
                 {
@@ -320,6 +360,8 @@ namespace CuraSys.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    PrescriptionNumber = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     VisitId = table.Column<int>(type: "int", nullable: false),
                     IssuedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Notes = table.Column<string>(type: "longtext", nullable: true)
@@ -446,6 +488,21 @@ namespace CuraSys.Migrations
                 column: "VisitId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_scheduled_tests_DoctorId",
+                table: "scheduled_tests",
+                column: "DoctorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_scheduled_tests_PatientId",
+                table: "scheduled_tests",
+                column: "PatientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_scheduled_tests_TestId",
+                table: "scheduled_tests",
+                column: "TestId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_staff_specialities_DoctorSpecialityId",
                 table: "staff_specialities",
                 column: "DoctorSpecialityId");
@@ -497,6 +554,9 @@ namespace CuraSys.Migrations
 
             migrationBuilder.DropTable(
                 name: "prescription_items");
+
+            migrationBuilder.DropTable(
+                name: "scheduled_tests");
 
             migrationBuilder.DropTable(
                 name: "staff_specialities");

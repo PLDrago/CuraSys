@@ -19,4 +19,5 @@ public class Patient
     public List<Visit> Visits { get; set; } = new();
     public List<Invoice> Invoices { get; set; } = new();
     public List<TestResult> TestResults { get; set; } = new();
+    public ICollection<ScheduledTest> ScheduledTests { get; set; } = new List<ScheduledTest>();
 }

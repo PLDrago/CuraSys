@@ -280,6 +280,10 @@ namespace CuraSys.Migrations
                     b.Property<string>("Notes")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("PrescriptionNumber")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<int>("VisitId")
                         .HasColumnType("int");
 
@@ -315,6 +319,45 @@ namespace CuraSys.Migrations
                     b.HasIndex("PrescriptionId");
 
                     b.ToTable("prescription_items", (string)null);
+                });
+
+            modelBuilder.Entity("CuraSys.Models.ScheduledTest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comments")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ScheduledDateTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("TestId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("PatientId");
+
+                    b.HasIndex("TestId");
+
+                    b.ToTable("scheduled_tests", (string)null);
                 });
 
             modelBuilder.Entity("CuraSys.Models.StaffSpeciality", b =>
@@ -542,6 +585,33 @@ namespace CuraSys.Migrations
                     b.Navigation("Prescription");
                 });
 
+            modelBuilder.Entity("CuraSys.Models.ScheduledTest", b =>
+                {
+                    b.HasOne("CuraSys.Models.MedicalStaff", "Doctor")
+                        .WithMany("ScheduledTests")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CuraSys.Models.Patient", "Patient")
+                        .WithMany("ScheduledTests")
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CuraSys.Models.MedicalTest", "Test")
+                        .WithMany("ScheduledTests")
+                        .HasForeignKey("TestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Patient");
+
+                    b.Navigation("Test");
+                });
+
             modelBuilder.Entity("CuraSys.Models.StaffSpeciality", b =>
                 {
                     b.HasOne("CuraSys.Models.DoctorSpeciality", "DoctorSpeciality")
@@ -625,6 +695,8 @@ namespace CuraSys.Migrations
 
             modelBuilder.Entity("CuraSys.Models.MedicalStaff", b =>
                 {
+                    b.Navigation("ScheduledTests");
+
                     b.Navigation("Specialities");
 
                     b.Navigation("Visits");
@@ -633,6 +705,8 @@ namespace CuraSys.Migrations
             modelBuilder.Entity("CuraSys.Models.MedicalTest", b =>
                 {
                     b.Navigation("Results");
+
+                    b.Navigation("ScheduledTests");
                 });
 
             modelBuilder.Entity("CuraSys.Models.Medicine", b =>
@@ -643,6 +717,8 @@ namespace CuraSys.Migrations
             modelBuilder.Entity("CuraSys.Models.Patient", b =>
                 {
                     b.Navigation("Invoices");
+
+                    b.Navigation("ScheduledTests");
 
                     b.Navigation("TestResults");
 
